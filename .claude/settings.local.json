@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm dev)",
+      "Bash(npm run dev:*)",
+      "Bash(npm install:*)",
+      "Bash(dir \"C:\\Users\\ngwen\\OneDrive - Singapore Polytechnic\\Desktop\\website\\developer-portfolio\\public\\assets\")",
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Read(//c/Users/ngwen/OneDrive - Singapore Polytechnic/Desktop/website/assests/**)",
+      "Read(//c/Users/ngwen/OneDrive - Singapore Polytechnic/Desktop/website/**)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
