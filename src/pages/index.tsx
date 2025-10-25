@@ -4,6 +4,8 @@ import styles from "@/styles/Home.module.css";
 import { Button } from "@/components/ui/button";
 import {
   ChevronRight,
+  ChevronDown,
+  ChevronUp,
   Code2,
   Database,
   Brain,
@@ -37,6 +39,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { motion } from "framer-motion";
+import VanillaTilt from "vanilla-tilt";
 
 const aboutStats = [
   { label: "Years of Experience", value: "2+" },
@@ -47,14 +50,14 @@ const aboutStats = [
 const projects = [
   {
     id: "cnn",
-    title: "Custom CNN for Vegetable Image Classification",
-    shortDesc: "Custom-built CNN achieving 99.09% accuracy in vegetable classification",
+    title: "Engineered a Custom CNN to Achieve 99.09% Test Accuracy on Vegetable Classification",
+    shortDesc: "Engineered a Custom CNN to Achieve 99.09% Test Accuracy on Vegetable Classification",
     techStack: ["Python", "TensorFlow", "Keras", "CNN", "Deep Learning"],
+    video: "/assets/projects/cnn/vegetables.mov",
     images: [
       "/assets/projects/cnn/Screenshot 2025-10-23 200709.png",
       "/assets/projects/cnn/Screenshot 2025-10-23 200857.png",
       "/assets/projects/cnn/Screenshot 2025-10-23 201017.png",
-      "/assets/projects/cnn/Picture3.png",
     ],
     fullDesc: `In this deep learning project, I engineered a custom Convolutional Neural Network (CNN) from scratch using Python and TensorFlow/Keras to classify 11 different types of vegetables with exceptional accuracy.
 
@@ -72,14 +75,13 @@ This project demonstrated my ability to build deep learning models from first pr
   },
   {
     id: "hdb",
-    title: "HDB Resale Market Analysis & Policy Recommendation",
-    shortDesc: "Data-driven policy framework based on analysis of 202,764 HDB transactions",
+    title: "Data Analysis of 200K+ HDB Transactions to Propose 3-Tiered Policy Framework",
+    shortDesc: "Data Analysis of 200K+ HDB Transactions to Propose 3-Tiered Policy Framework",
     techStack: ["Python", "Pandas", "Tableau", "Data Visualization"],
+    video: "/assets/projects/hdb/hdb-buildings.mp4",
     images: [
       "/assets/projects/hdb/Picture4.png",
       "/assets/projects/hdb/Picture5.png",
-      "/assets/projects/hdb/Picture7.png",
-      "/assets/projects/hdb/unnamed.png",
     ],
     fullDesc: `A comprehensive data analytics project that transformed raw transaction data into actionable policy recommendations for Singapore's public housing market.
 
@@ -100,9 +102,10 @@ Extracted actionable insights that led to the development of a 3-tiered policy f
   },
   {
     id: "learning-express",
-    title: "Learning Express - Digital Transformation for Vietnamese Artisan",
-    shortDesc: "🏆 2nd Prize Winner - Full digital transformation for Vietnamese traditional craft business",
+    title: "Led Digital Transformation: Full Website Redesign for Vietnamese Artisan & Business Growth",
+    shortDesc: "Led Digital Transformation: Full Website Redesign for Vietnamese Artisan & Business Growth",
     techStack: ["HTML", "CSS", "JavaScript", "UX/UI Design", "Chatbot Integration"],
+    video: "/assets/projects/learning-express/vietnam.mp4",
     images: [
       "/assets/projects/learning-express/Screenshot 2025-10-23 194813.png",
       "/assets/projects/learning-express/NTTU-35.JPG",
@@ -128,9 +131,10 @@ The solution successfully exceeded the owner's expectations and won **2nd Prize 
   },
   {
     id: "glove-royale",
-    title: "Glove Royale - Full-Stack Boxing Simulation Game",
-    shortDesc: "Full-stack web application with secure authentication and modular API architecture",
+    title: "Architected Modular Full-Stack Web App: Node.js, MySQL, and RESTful API for Boxing Game",
+    shortDesc: "Architected Modular Full-Stack Web App: Node.js, MySQL, and RESTful API for Boxing Game",
     techStack: ["Node.js", "Express.js", "MySQL", "RESTful API", "JWT", "bcrypt"],
+    video: "/assets/projects/glove-royale/boxing.mp4",
     images: [
       "/assets/projects/glove-royale/Screenshot 2025-10-23 195747.png",
       "/assets/projects/glove-royale/Screenshot 2025-10-23 195849.png",
@@ -159,9 +163,10 @@ Prioritized application security through industry-standard practices:
   },
   {
     id: "gan",
-    title: "Conditional GAN for Handwritten Letter Generation",
-    shortDesc: "Novel conditional DCGAN generating synthetic handwritten letters with 98% validation accuracy",
+    title: "Developed CDCGAN with Novel Evaluation Pipeline for High-Fidelity Synthetic Letter Generation",
+    shortDesc: "Developed CDCGAN with Novel Evaluation Pipeline for High-Fidelity Synthetic Letter Generation",
     techStack: ["Python", "Deep Learning", "GANs", "CNN", "TensorFlow"],
+    video: "/assets/projects/gan/handwriting.mov",
     images: [
       "/assets/projects/gan/Picture9.png",
       "/assets/projects/gan/download.png",
@@ -191,9 +196,10 @@ Engineered an innovative validation approach:
   },
   {
     id: "genai-website",
-    title: "GenAI Website Architect",
-    shortDesc: "AI-powered prompt-to-website application leveraging generative AI for rapid prototyping",
+    title: "Rapid Prototyping: Leveraging GenAI (Hugging Face) to Build and Refine Websites from Prompts",
+    shortDesc: "Rapid Prototyping: Leveraging GenAI (Hugging Face) to Build and Refine Websites from Prompts",
     techStack: ["Hugging Face", "Generative AI", "HTML", "CSS", "Prompt Engineering"],
+    video: "/assets/projects/genai-website/genai.mp4",
     images: ["/assets/projects/genai-website/Screenshot 2025-10-23 195600.png"],
     fullDesc: `An innovative personal project that harnesses the power of generative AI to transform natural language descriptions into functional websites.
 
@@ -297,6 +303,7 @@ export default function Home() {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const [current, setCurrent] = useState<number>(0);
   const [count, setCount] = useState<number>(0);
+  const [isBusinessExpanded, setIsBusinessExpanded] = useState<boolean>(false);
 
   // handle scroll
   useEffect(() => {
@@ -349,6 +356,19 @@ export default function Home() {
       setCurrent(carouselApi.selectedScrollSnap() + 1);
     });
   }, [carouselApi]);
+
+  // card hover effect
+  useEffect(() => {
+    const tilt: HTMLElement[] = Array.from(document.querySelectorAll("#tilt"));
+    VanillaTilt.init(tilt, {
+      speed: 300,
+      glare: true,
+      "max-glare": 0.1,
+      gyroscope: true,
+      perspective: 900,
+      scale: 0.9,
+    });
+  }, []);
 
   return (
     <Container>
@@ -523,20 +543,6 @@ export default function Home() {
                     </Link>
                   </div>
                 </div>
-
-                <div className="space-y-2 pt-4">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    Languages
-                  </h3>
-                  <div className="flex gap-4">
-                    <span className="text-sm text-muted-foreground">
-                      English (Fluent)
-                    </span>
-                    <span className="text-sm text-muted-foreground">
-                      Chinese (Conversational)
-                    </span>
-                  </div>
-                </div>
               </div>
 
               <div className="flex items-center justify-center">
@@ -598,54 +604,59 @@ export default function Home() {
 
             {/* Carousel */}
             <div className="mt-14">
-              <Carousel setApi={setCarouselApi} className="w-full">
+              <Carousel setApi={setCarouselApi} className="w-full" opts={{ align: "center", startIndex: 1 }}>
                 <CarouselContent>
                   {projects.map((project) => (
                     <CarouselItem key={project.id} className="md:basis-1/2">
-                      <Link href={`/projects/${project.id}`} passHref>
-                        <Card className="group cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
-                          <CardHeader className="p-0">
-                            <div className="relative overflow-hidden rounded-t-md">
-                              {project.images && project.images.length > 0 && (
+                      <Card id="tilt">
+                        <CardHeader className="p-0">
+                          <Link href={`/projects/${project.id}`} passHref>
+                            {project.video ? (
+                              <video
+                                src={project.video}
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="aspect-video h-full w-full rounded-t-md bg-primary object-cover"
+                              />
+                            ) : (
+                              project.images && project.images.length > 0 && project.images[0] && (
                                 <Image
                                   src={project.images[0]}
                                   alt={project.title}
                                   width={600}
                                   height={300}
                                   quality={100}
-                                  className="aspect-video h-full w-full bg-primary object-cover transition-transform duration-300 group-hover:scale-105"
+                                  className="aspect-video h-full w-full rounded-t-md bg-primary object-cover"
                                 />
-                              )}
-                            </div>
-                          </CardHeader>
-                          <CardContent className="p-6">
-                            <CardTitle className="text-xl font-semibold tracking-tight">
-                              {project.title}
-                            </CardTitle>
-                            <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                              )
+                            )}
+                          </Link>
+                        </CardHeader>
+                        <CardContent className="absolute bottom-0 w-full bg-background/80 backdrop-blur-md">
+                          <div className="border-t border-white/10 p-4">
+                            <CardTitle className="text-base font-normal tracking-tighter text-foreground">
                               {project.shortDesc}
-                            </p>
-                            <div className="mt-4 flex flex-wrap gap-2">
+                            </CardTitle>
+                            <div className="mt-3 flex flex-wrap gap-2">
                               {project.techStack.slice(0, 3).map((tech) => (
                                 <span
                                   key={tech}
-                                  className="rounded-full bg-primary/10 px-3 py-1 text-xs text-primary"
+                                  className="rounded-full bg-primary/20 px-3 py-1.5 text-xs font-medium text-primary"
                                 >
                                   {tech}
                                 </span>
                               ))}
                               {project.techStack.length > 3 && (
-                                <span className="rounded-full bg-primary/10 px-3 py-1 text-xs text-primary">
+                                <span className="rounded-full bg-primary/20 px-3 py-1.5 text-xs font-medium text-primary">
                                   +{project.techStack.length - 3} more
                                 </span>
                               )}
                             </div>
-                            <Button variant="ghost" className="mt-4 w-full">
-                              View Details <ChevronRight className="ml-2 h-4 w-4" />
-                            </Button>
-                          </CardContent>
-                        </Card>
-                      </Link>
+                          </div>
+                        </CardContent>
+                      </Card>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
@@ -665,8 +676,8 @@ export default function Home() {
         {/* Entrepreneurial Experience Section */}
         <section id="entrepreneurial" data-scroll-section>
           <div data-scroll data-scroll-speed=".4" className="my-64">
-            <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
-              💼 Entrepreneurial Experience
+            <span className="text-gradient clash-grotesk text-sm font-semibold uppercase tracking-wider">
+              Entrepreneurial Experience
             </span>
             <h2 className="mt-3 text-4xl font-semibold tracking-tight xl:text-6xl">
               Building a Successful Business
@@ -675,82 +686,179 @@ export default function Home() {
               From passion to profit: My PC reselling journey
             </p>
 
-            <Accordion type="single" collapsible className="mt-14 w-full">
-              <AccordionItem value="entrepreneurial">
-                <AccordionTrigger className="hover:no-underline">
-                  <div className="flex w-full flex-col items-start gap-3 pr-4 text-left">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg font-semibold text-foreground">
-                        Founder & PC Reselling Specialist | Carousell Business
-                      </span>
+            {/* Business Header */}
+            <div className="mt-12 rounded-xl border border-white/10 bg-gradient-to-br from-primary/5 to-transparent p-8">
+              <div className="flex flex-col gap-3">
+                <h3 className="text-2xl font-bold tracking-tight">
+                  Founder & PC Reselling Specialist | Carousell Business
+                </h3>
+                <p className="text-sm font-medium uppercase tracking-wider text-primary">
+                  March 2025 – Present
+                </p>
+                <p className="text-base text-muted-foreground">
+                  Generating $10,000+ in revenue with 150+ positive customer reviews through data-driven market analysis
+                </p>
+                <button
+                  onClick={() => setIsBusinessExpanded(!isBusinessExpanded)}
+                  className="mt-4 flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
+                >
+                  {isBusinessExpanded ? (
+                    <>
+                      <ChevronUp className="h-4 w-4" />
+                      Hide Details
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown className="h-4 w-4" />
+                      View Details
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Gallery - Always Visible */}
+            <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:gap-6">
+              {entrepreneurialImages.map((image, idx) => (
+                <div
+                  key={idx}
+                  className="group relative aspect-square overflow-hidden rounded-lg border border-white/10 transition-transform hover:scale-[1.02]"
+                >
+                  <Image
+                    src={image}
+                    alt={`PC Build ${idx + 1}`}
+                    fill
+                    className="object-cover transition-transform group-hover:scale-105"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {isBusinessExpanded && (
+              <>
+                {/* Content */}
+                <div className="mt-12 space-y-12">
+                  <p className="text-lg leading-relaxed text-muted-foreground">
+                    What started as a personal hobby over a decade ago has evolved into a thriving entrepreneurial venture. I formalized my extensive trading experience by establishing a professional PC reselling business on Carousell, Singapore's leading marketplace platform.
+                  </p>
+
+                  {/* Business Metrics */}
+                  <div className="rounded-xl border border-white/10 bg-background/50 p-8">
+                    <h3 className="mb-6 text-xl font-bold tracking-tight">Business Metrics</h3>
+                    <div className="grid gap-6 md:grid-cols-2">
+                      <div className="space-y-2">
+                        <div className="text-3xl font-bold text-primary">$10,000+</div>
+                        <p className="text-sm text-muted-foreground">Revenue generated since launching in March 2025</p>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-3xl font-bold text-primary">150+</div>
+                        <p className="text-sm text-muted-foreground">Positive customer reviews reflecting excellent service and quality</p>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-3xl font-bold text-primary">150%</div>
+                        <p className="text-sm text-muted-foreground">Average markup achieved through strategic market analysis</p>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-3xl font-bold text-primary">10+</div>
+                        <p className="text-sm text-muted-foreground">Years of experience in PC hardware trading and market dynamics</p>
+                      </div>
                     </div>
-                    <p className="text-sm text-muted-foreground">
-                      March 2025 – Present
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Generating $10,000+ in revenue with 150+ positive customer
-                      reviews through data-driven market analysis
-                    </p>
                   </div>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="space-y-6 pt-4">
-                    <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-                      {entrepreneurialImages.map((image, idx) => (
-                        <div
-                          key={idx}
-                          className="relative aspect-square overflow-hidden rounded-lg border border-white/10"
-                        >
-                          <Image
-                            src={image}
-                            alt={`PC Build ${idx + 1}`}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                    <div className="prose prose-invert max-w-none">
-                      <p className="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
-                        {`What started as a personal hobby over a decade ago has evolved into a thriving entrepreneurial venture. I formalized my extensive trading experience by establishing a professional PC reselling business on Carousell, Singapore's leading marketplace platform.
 
-📈 Business Metrics:
-• $10,000+ in Revenue generated since launching in March 2025
-• 150+ Positive Customer Reviews reflecting excellent service and quality
-• 150% Average Markup achieved through strategic market analysis
-• Decade of Experience in PC hardware trading and market dynamics
+                  {/* Strategic Approach */}
+                  <div>
+                    <h3 className="mb-8 text-2xl font-bold tracking-tight">Strategic Approach</h3>
+                    <div className="grid gap-8 md:grid-cols-3">
+                      <div className="space-y-4 rounded-xl border border-white/10 bg-background/50 p-6">
+                        <h4 className="text-lg font-semibold">Market Analysis</h4>
+                        <ul className="space-y-3 text-sm text-muted-foreground">
+                          <li className="flex gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                            <span>Monitor real-time market trends and pricing data across multiple platforms</span>
+                          </li>
+                          <li className="flex gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                            <span>Identify undervalued PC components and complete systems</span>
+                          </li>
+                          <li className="flex gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                            <span>Analyze supply-demand dynamics to optimize purchasing decisions</span>
+                          </li>
+                        </ul>
+                      </div>
 
-💡 Strategic Approach:
+                      <div className="space-y-4 rounded-xl border border-white/10 bg-background/50 p-6">
+                        <h4 className="text-lg font-semibold">Value Creation</h4>
+                        <ul className="space-y-3 text-sm text-muted-foreground">
+                          <li className="flex gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                            <span>Source high-quality components at competitive prices</span>
+                          </li>
+                          <li className="flex gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                            <span>Perform thorough testing and quality assurance on all hardware</span>
+                          </li>
+                          <li className="flex gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                            <span>Provide detailed specifications and honest product descriptions</span>
+                          </li>
+                          <li className="flex gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                            <span>Offer configuration advice and technical support to customers</span>
+                          </li>
+                        </ul>
+                      </div>
 
-Market Analysis:
-• Monitor real-time market trends and pricing data across multiple platforms
-• Identify undervalued PC components and complete systems
-• Analyze supply-demand dynamics to optimize purchasing decisions
-
-Value Creation:
-• Source high-quality components at competitive prices
-• Perform thorough testing and quality assurance on all hardware
-• Provide detailed specifications and honest product descriptions
-• Offer configuration advice and technical support to customers
-
-Customer-Centric Sales:
-• Manage the full sales cycle from sourcing to delivery
-• Maintain transparent communication throughout the transaction
-• Provide after-sales support and warranty assistance
-• Build long-term relationships resulting in repeat customers and referrals
-
-🎯 Business Impact:
-This venture demonstrates my ability to:
-• Apply analytical thinking to real-world business challenges
-• Identify market opportunities through data analysis
-• Manage operations end-to-end with attention to detail
-• Deliver exceptional customer experiences that drive growth`}
-                      </p>
+                      <div className="space-y-4 rounded-xl border border-white/10 bg-background/50 p-6">
+                        <h4 className="text-lg font-semibold">Customer-Centric Sales</h4>
+                        <ul className="space-y-3 text-sm text-muted-foreground">
+                          <li className="flex gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                            <span>Manage the full sales cycle from sourcing to delivery</span>
+                          </li>
+                          <li className="flex gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                            <span>Maintain transparent communication throughout the transaction</span>
+                          </li>
+                          <li className="flex gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                            <span>Provide after-sales support and warranty assistance</span>
+                          </li>
+                          <li className="flex gap-2">
+                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                            <span>Build long-term relationships resulting in repeat customers and referrals</span>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+
+                  {/* Business Impact */}
+                  <div className="rounded-xl border border-primary/20 bg-primary/5 p-8">
+                    <h3 className="mb-4 text-xl font-bold tracking-tight">Business Impact</h3>
+                    <p className="mb-4 text-base text-muted-foreground">This venture demonstrates my ability to:</p>
+                    <ul className="grid gap-3 md:grid-cols-2">
+                      <li className="flex gap-3">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                        <span className="text-sm text-muted-foreground">Apply analytical thinking to real-world business challenges</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                        <span className="text-sm text-muted-foreground">Identify market opportunities through data analysis</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                        <span className="text-sm text-muted-foreground">Manage operations end-to-end with attention to detail</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                        <span className="text-sm text-muted-foreground">Deliver exceptional customer experiences that drive growth</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </section>
 
@@ -788,12 +896,12 @@ This venture demonstrates my ability to:
                     Technical Skills
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap items-center gap-2.5">
+                <CardContent className="p-6">
+                  <div className="flex flex-wrap items-center gap-3">
                     {skills.technical.map((skill) => (
                       <span
                         key={skill}
-                        className="inline-flex items-center rounded-lg bg-primary/10 px-4 py-2 text-sm font-medium text-primary transition hover:bg-primary/20"
+                        className="inline-flex items-center rounded-lg bg-primary/10 px-5 py-2.5 text-sm font-medium text-primary transition hover:bg-primary/20"
                       >
                         {skill}
                       </span>
@@ -809,12 +917,12 @@ This venture demonstrates my ability to:
                     Soft Skills
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap items-center gap-2.5">
+                <CardContent className="p-6">
+                  <div className="flex flex-wrap items-center gap-3">
                     {skills.soft.map((skill) => (
                       <span
                         key={skill}
-                        className="inline-flex items-center rounded-lg bg-secondary/10 px-4 py-2 text-sm font-medium text-secondary-foreground transition hover:bg-secondary/20"
+                        className="inline-flex items-center rounded-lg bg-secondary/10 px-5 py-2.5 text-sm font-medium text-secondary-foreground transition hover:bg-secondary/20"
                       >
                         {skill}
                       </span>
@@ -830,15 +938,15 @@ This venture demonstrates my ability to:
                     Certifications
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
+                <CardContent className="p-6">
+                  <ul className="space-y-3">
                     {skills.certifications.map((cert) => (
                       <li
                         key={cert}
-                        className="flex items-center text-sm text-muted-foreground"
+                        className="flex items-start text-sm text-muted-foreground"
                       >
-                        <ChevronRight className="mr-2 h-4 w-4 text-primary" />
-                        {cert}
+                        <ChevronRight className="mr-2 mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                        <span>{cert}</span>
                       </li>
                     ))}
                   </ul>
@@ -879,8 +987,8 @@ This venture demonstrates my ability to:
                         className="object-cover"
                       />
                     </div>
-                    <CardContent className="p-4">
-                      <p className="text-sm font-medium text-foreground">
+                    <CardContent className="p-6">
+                      <p className="text-sm font-medium leading-relaxed text-foreground">
                         {award.title}
                       </p>
                     </CardContent>
@@ -892,10 +1000,10 @@ This venture demonstrates my ability to:
                 <CardHeader>
                   <CardTitle>Hackathon Participation</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
+                <CardContent className="p-6">
+                  <ul className="space-y-4">
                     <li className="flex items-start text-sm">
-                      <ChevronRight className="mr-2 mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <ChevronRight className="mr-3 mt-0.5 h-4 w-4 shrink-0 text-primary" />
                       <span className="text-muted-foreground">
                         <strong className="text-foreground">
                           2nd Prize Winner
@@ -904,7 +1012,7 @@ This venture demonstrates my ability to:
                       </span>
                     </li>
                     <li className="flex items-start text-sm">
-                      <ChevronRight className="mr-2 mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <ChevronRight className="mr-3 mt-0.5 h-4 w-4 shrink-0 text-primary" />
                       <span className="text-muted-foreground">
                         <strong className="text-foreground">
                           Semi-Finalist & People&apos;s Choice Award Winner
@@ -913,14 +1021,14 @@ This venture demonstrates my ability to:
                       </span>
                     </li>
                     <li className="flex items-start text-sm">
-                      <ChevronRight className="mr-2 mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <ChevronRight className="mr-3 mt-0.5 h-4 w-4 shrink-0 text-primary" />
                       <span className="text-muted-foreground">
                         <strong className="text-foreground">Participant</strong>{" "}
                         - NUS Maritime Hackathon (2025)
                       </span>
                     </li>
                     <li className="flex items-start text-sm">
-                      <ChevronRight className="mr-2 mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <ChevronRight className="mr-3 mt-0.5 h-4 w-4 shrink-0 text-primary" />
                       <span className="text-muted-foreground">
                         <strong className="text-foreground">Participant</strong>{" "}
                         - PolyFinTech100 API Hackathon
@@ -934,16 +1042,20 @@ This venture demonstrates my ability to:
                 <CardHeader>
                   <CardTitle>Academic Excellence</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    Recipient of Edusave Awards (2017-2023) for consistent
+                <CardContent className="p-6">
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    Recipient of Edusave Awards (2017-2024) for consistent
                     academic excellence and leadership, including the{" "}
                     <strong className="text-foreground">
                       Edusave Scholarship (2020)
-                    </strong>{" "}
-                    and the{" "}
+                    </strong>
+                    , the{" "}
                     <strong className="text-foreground">
                       EAGLES Award (2019)
+                    </strong>
+                    , and the most recent{" "}
+                    <strong className="text-foreground">
+                      Good Progress Award (2024)
                     </strong>
                     .
                   </p>

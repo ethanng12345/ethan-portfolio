@@ -43,4 +43,9 @@ yarn-error.log*
 
 # webstorm
 .idea
+
+# Large video files (too big for GitHub, will be deployed via Vercel)
+public/assets/projects/**/*.mov
+public/assets/projects/**/*.mp4
+public/assets/projects/**/*.webm
 ```
