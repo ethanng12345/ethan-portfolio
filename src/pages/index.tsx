@@ -7,12 +7,9 @@ import {
   ChevronDown,
   ChevronUp,
   Code2,
-  Database,
   Brain,
   Award,
   Download,
-  ExternalLink,
-  Github,
   Linkedin,
   Mail,
   Phone,
@@ -32,12 +29,6 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { motion } from "framer-motion";
 import VanillaTilt from "vanilla-tilt";
 
@@ -492,7 +483,7 @@ export default function Home() {
                   About Me
                 </h2>
                 <p className="text-base leading-relaxed text-muted-foreground">
-                  I'm an analytical and detail-oriented student pursuing a{" "}
+                  I&apos;m an analytical and detail-oriented student pursuing a{" "}
                   <span className="text-foreground font-medium">
                     Diploma in Applied AI & Analytics
                   </span>{" "}
@@ -500,19 +491,19 @@ export default function Home() {
                   analytics, Python, SQL, and statistical modeling.
                 </p>
                 <p className="text-base leading-relaxed text-muted-foreground">
-                  I'm proficient in the{" "}
+                  I&apos;m proficient in the{" "}
                   <span className="text-foreground font-medium">
                     end-to-end machine learning lifecycle
                   </span>
                   , from data engineering and model development to deployment.
-                  I'm passionate about applying quantitative skills to derive
+                  I&apos;m passionate about applying quantitative skills to derive
                   actionable business insights and contribute to challenging
                   data-driven projects.
                 </p>
                 <p className="text-base leading-relaxed text-muted-foreground">
-                  When I'm not analyzing data or building machine learning
+                  When I&apos;m not analyzing data or building machine learning
                   models, I enjoy exploring new technologies and working on side
-                  projects. I've turned my passion for technology into an
+                  projects. I&apos;ve turned my passion for technology into an
                   entrepreneurial venture, building a successful PC reselling
                   business.
                 </p>
@@ -739,7 +730,7 @@ export default function Home() {
                 {/* Content */}
                 <div className="mt-12 space-y-12">
                   <p className="text-lg leading-relaxed text-muted-foreground">
-                    What started as a personal hobby over a decade ago has evolved into a thriving entrepreneurial venture. I formalized my extensive trading experience by establishing a professional PC reselling business on Carousell, Singapore's leading marketplace platform.
+                    What started as a personal hobby over a decade ago has evolved into a thriving entrepreneurial venture. I formalized my extensive trading experience by establishing a professional PC reselling business on Carousell, Singapore&apos;s leading marketplace platform.
                   </p>
 
                   {/* Business Metrics */}
