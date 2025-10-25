@@ -1,0 +1,4 @@
+# Large video files - need to be hosted externally or compressed
+public/assets/projects/**/*.mov
+public/assets/projects/**/*.mp4
+public/assets/projects/**/*.webm
