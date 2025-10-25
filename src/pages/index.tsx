@@ -157,7 +157,7 @@ Prioritized application security through industry-standard practices:
     title: "Developed CDCGAN with Novel Evaluation Pipeline for High-Fidelity Synthetic Letter Generation",
     shortDesc: "Developed CDCGAN with Novel Evaluation Pipeline for High-Fidelity Synthetic Letter Generation",
     techStack: ["Python", "Deep Learning", "GANs", "CNN", "TensorFlow"],
-    video: "/assets/projects/gan/handwriting.mov",
+    video: "/assets/projects/gan/handwriting.mp4",
     images: [
       "/assets/projects/gan/Picture9.png",
       "/assets/projects/gan/download.png",

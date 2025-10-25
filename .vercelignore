@@ -1,4 +1,1 @@
-# Large video files - need to be hosted externally or compressed
-public/assets/projects/**/*.mov
-public/assets/projects/**/*.mp4
-public/assets/projects/**/*.webm
+# Videos are now compressed and small enough to deploy
